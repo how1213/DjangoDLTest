@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h2 class="user-name">@{{ user.username }}</h2>
+
+{% if user.is_superuser %}
+  {% if user == request.user %}
+    <p>管理者</p>
+    <h2>ユーザー情報</h2>
+    <p>性：{{ user.first_name }} <p>
+    <p>名：{{ user.last_name }} </p>
+    <p>メールアドレス：{{ user.email }}</p>
+    {% if user == request.user %}
+      <button><a href="{% url 'app:users_edit' user.pk %}">ユーザ情報を編集する</a></button>
+    {% endif %}  
+    <br>
+    <h2>アップロード履歴<h2>
+    {% for files in files %}
+      <h3><a href="{% url 'app:files_detail' files.pk %}">&emsp;タイトル：{{ files }}</a></h3>
+      <a href="{{ files.file.url }}" download="{{ files.name }}">&emsp;{{ files.file.name }}</a>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <p>一般ユーザー</p>
+   <h2>ユーザー情報</h2>
+  <p>性：{{ user.first_name }} <p>
+  <p>名：{{ user.last_name }} </p>
+  <p>メールアドレス：{{ user.email }}</p>
+  {% if user == request.user %}
+    <button><a href="{% url 'app:users_edit' user.pk %}">ユーザ情報を編集する</a></button>
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h2>トップページ</h2>
+
+{% for files in files %}
+    <h3><a href="{% url 'app:files_detail' files.pk %}">&emsp;{{ files }}@{{ files.user.username }}</a></h3>
+    <a href="{{ files.file.url }}" download="{{ files.name }}">&emsp;{{ files.file.name }}</a>
+{% endfor %}
+
+{% endblock %}

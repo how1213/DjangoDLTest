@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+
+<form action="{% url 'app:files_new' %}" method="POST" enctype="multipart/form-data">
+
+    <h3>タイトル：{{ files }}</h3>
+    <p>作成者：@{{ files.user.username }}</p>
+    <p>コメント：{{ files.comment }}</p>
+    <a href="{{ files.file.url }}" download="{{ files.name }}">{{ files.file.name }}</a>
+    <br><br>
+    <div>
+        <button type="button" onclick="history.back()">戻る</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+<h2>ユーザー情報編集</h2>
+
+<form method="POST" action="{% url 'app:users_edit' user.pk %}">{% csrf_token %}
+    <label>名前（性）</label>
+    {{ form.first_name }}
+    <br>
+    <label>名前（名）</label>
+    {{ form.last_name }}
+    <br>
+    <label>メールアドレス</label>
+    {{ form.email }}
+    <br>
+    <button type="submit">変更する</button>
+</form>
+{% endblock %}
